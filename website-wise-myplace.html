@@ -35,19 +35,28 @@
     <link rel="stylesheet" href="assets/css/Table-With-Search.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <script>
-    $(function(){
-        for(var i= 0; i< 10 ; i++ )
-        {$('.searchResults').append('<div class="row"><div class="col"><div><div class="card"><div class="card-body"><div class="container"><div class="row"><div class="col-3 d-xl-flex justify-content-xl-center align-items-xl-center"><img class="img-fluid d-xl-flex justify-content-xl-center align-items-xl-center" src="https://picsum.photos/seed/picsum/300/200" style="border-radius: 15px;" /></div><div class="col"><div class="row"><div class="col"><h4>Title</h4></div></div><div class="row"><div class="col"><p style="color: var(--bs-gray-900);font-family: Roboto, sans-serif;font-size: 12px;">Description</p></div></div><div class="row"><div class="col"><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">Part Number :</p><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">List Price :</p><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">Your Price :</p></div></div></div></div></div></div></div></div></div></div>')
-    }
-    });
-        
-    </script>
+
 
     <script>
        $(document).ready(function(){
             $("#searchButton").click(function(){
-                var param = {
+
+                $.ajax({
+                    url: "https://api.github.com/repositories/19438/issues",
+                    type: 'GET',
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (data, status) {
+                        console.log(data[0].comments_url);
+                        console.log(status);
+                        console.log(data.length)
+                        for(var i= 0; i < data.data.length ; i++ )
+                        {$('.searchResults').append('<div class="row"><div class="col"><div><div class="card"><div class="card-body"><div class="container"><div class="row"><div class="col-3 d-xl-flex justify-content-xl-center align-items-xl-center"><img class="img-fluid d-xl-flex justify-content-xl-center align-items-xl-center" src="'+data.data[i].imageUrl+'" style="border-radius: 15px;" /></div><div class="col"><div class="row"><div class="col"><h4>Title</h4></div></div><div class="row"><div class="col"><p style="color: var(--bs-gray-900);font-family: Roboto, sans-serif;font-size: 12px;">'+data.data[i].description+'</p></div></div><div class="row"><div class="col"><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">Part Number :'+data.data[i].partNumber+'</p><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">List Price :'+data.data[i].listPrice+'</p><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">Your Price :'+data.data[i].yourPrice+'</p></div></div></div></div></div></div></div></div></div></div>')
+                    }
+                    },
+
+                })
+              /*  var param = {
                     "site": "KEYSTONE_AUTOMOTIVE",
                     "make": "TOYOTA",
                     "model": "CHR",
@@ -63,14 +72,14 @@
                     contentType: "application/json",
                     data: JSON.stringify(param),
                     success: function (data, status) {
-                        console.log(data.data[0]);
+                        console.log(data);
                         console.log(status);
                     },
                     error: function(xhr, desc, err){
                         alert(err.responseText)
                     }
 
-                }); 
+                }); */
             });
           }); 
 
