@@ -40,12 +40,20 @@
     <script>
        $(document).ready(function(){
             $("#searchButton").click(function(){
-
+                var param = {
+                    "site": "KEYSTONE_AUTOMOTIVE",
+                    "make": "TOYOTA",
+                    "model": "CHR",
+                    "year": "2018",
+                    "engine": "a",
+                    "category": "all parts",
+                    "group": "a"
                 $.ajax({
-                    url: "https://api.github.com/repositories/19438/issues",
-                    type: 'GET',
+                    url: 'http://localhost:8080/search',
+                    type: 'POST',
                     dataType: "json",
                     contentType: "application/json",
+                    data: JSON.stringify(param),
                     success: function (data, status) {
                         console.log(data[0].comments_url);
                         console.log(status);
