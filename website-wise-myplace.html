@@ -45,9 +45,6 @@
     </script>
 
     <script>
-
-        $(document).ready(function(){
-            $("#searchButton").click(function(){
        $(document).ready(function(){
             $("#searchButton").click(function(){
                 var param = {
@@ -59,7 +56,6 @@
                     "category": "all parts",
                     "group": "a"
                 };
-                alert(param["site"])
                 $.ajax({
                     url: 'http://localhost:8080/search',
                     type: 'POST',
@@ -67,8 +63,7 @@
                     contentType: "application/json",
                     data: JSON.stringify(param),
                     success: function (data, status) {
-                        alert(data);
-                        console.log(data);
+                        console.log(data.data[0]);
                         console.log(status);
                     },
                     error: function(xhr, desc, err){
@@ -78,8 +73,6 @@
                 }); 
             });
           }); 
-            });
-          });
 
     </script>
 
