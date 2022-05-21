@@ -47,7 +47,7 @@
                     "year": "2018",
                     "engine": "a",
                     "category": "all parts",
-                    "group": "a"
+                    "group": "a"}
                 $.ajax({
                     url: 'http://localhost:8080/search',
                     type: 'POST',
@@ -55,7 +55,6 @@
                     contentType: "application/json",
                     data: JSON.stringify(param),
                     success: function (data, status) {
-                        console.log(data[0].comments_url);
                         console.log(status);
                         console.log(data.length)
                         for(var i= 0; i < data.data.length ; i++ )
