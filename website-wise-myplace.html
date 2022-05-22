@@ -292,6 +292,25 @@
         });
     </script>
 
+    <script>
+        $(function(){
+            $("#catagory").change(function(){
+                var status = this.value ;
+
+                if (status != "11"){
+                    $('#engine').append('<option value="2.4">2.4</option>');
+                    $('#group').removeAttr('disabled');
+                }else of(status == "N\A"){
+                    $('#engine').append('<option value="2.4">2.4</option>');
+                    $('#catagory').removeAttr('disabled');
+                }else{
+                    $('#catagory').attr('disabled', 'disabled');
+                }
+
+            });
+        });
+    </script>
+
 
   </head>
 

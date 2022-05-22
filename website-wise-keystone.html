@@ -1,131 +1,456 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
     <title>FrontEnd</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/-Login-form-Page-BS4-.css">
-    <link rel="stylesheet" href="assets/css/Animated-Type-Heading.css">
-    <link rel="stylesheet" href="assets/css/dh-header-non-rectangular.css">
-    <link rel="stylesheet" href="assets/css/Dynamic-Table.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="assets/css/ImageHeader.css">
-    <link rel="stylesheet" href="assets/css/Login-with-overlay-image.css">
-    <link rel="stylesheet" href="assets/css/Modern-Contact-Form.css">
-    <link rel="stylesheet" href="assets/css/Navigation-Clean.css">
-    <link rel="stylesheet" href="assets/css/Pretty-Registration-Form.css">
-    <link rel="stylesheet" href="assets/css/Pretty-Search-Form.css">
-    <link rel="stylesheet" href="assets/css/Responsive-Form-1.css">
-    <link rel="stylesheet" href="assets/css/Responsive-Form.css">
-    <link rel="stylesheet" href="assets/css/reveal-nav-on-scroll.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/Table-With-Search-1.css">
-    <link rel="stylesheet" href="assets/css/Table-With-Search.css">
-</head>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto"
+    />
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/css/-Login-form-Page-BS4-.css" />
+    <link rel="stylesheet" href="assets/css/Animated-Type-Heading.css" />
+    <link rel="stylesheet" href="assets/css/dh-header-non-rectangular.css" />
+    <link rel="stylesheet" href="assets/css/Dynamic-Table.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/ImageHeader.css" />
+    <link rel="stylesheet" href="assets/css/Login-with-overlay-image.css" />
+    <link rel="stylesheet" href="assets/css/Modern-Contact-Form.css" />
+    <link rel="stylesheet" href="assets/css/Navigation-Clean.css" />
+    <link rel="stylesheet" href="assets/css/Pretty-Registration-Form.css" />
+    <link rel="stylesheet" href="assets/css/Pretty-Search-Form.css" />
+    <link rel="stylesheet" href="assets/css/Responsive-Form-1.css" />
+    <link rel="stylesheet" href="assets/css/Responsive-Form.css" />
+    <link rel="stylesheet" href="assets/css/reveal-nav-on-scroll.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/Table-With-Search-1.css" />
+    <link rel="stylesheet" href="assets/css/Table-With-Search.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<body>
+
+
+    <script>
+       $(document).ready(function(){
+            $("#searchButton").click(function(){
+                var make =  $('#smake option:selected').text();
+                var model =  $('#model_select option:selected').text();
+                var year =  $('#year option:selected').text();
+                var param = {
+                    "site": "KEYSTONE_AUTOMOTIVE",
+                    "make": make,
+                    "model": model,
+                    "year": year,
+                    "engine": "a",
+                    "category": "all parts",
+                    "group": "a"};
+                $.ajax({
+                    url: 'http://localhost:8080/search',
+                    type: 'POST',
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(param),
+                    success: function (data, status) {
+                        console.log(data[0].comments_url);
+                        console.log(status);
+                        console.log(data.length)
+                        for(var i= 0; i < data.data.length ; i++ )
+                        {$('.searchResults').append('<div class="row"><div class="col"><div><div class="card"><div class="card-body"><div class="container"><div class="row"><div class="col-3 d-xl-flex justify-content-xl-center align-items-xl-center"><img class="img-fluid d-xl-flex justify-content-xl-center align-items-xl-center" src="'+data.data[i].imageUrl+'" style="border-radius: 15px;" /></div><div class="col"><div class="row"><div class="col"><h4>'+data.data[i].titlt+'</h4></div></div><div class="row"><div class="col"><p style="color: var(--bs-gray-900);font-family: Roboto, sans-serif;font-size: 12px;">'+data.data[i].description+'</p></div></div><div class="row"><div class="col"><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">Part Number :'+data.data[i].partNumber+'</p><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">List Price :'+data.data[i].listPrice+'</p><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">Your Price :'+data.data[i].yourPrice+'</p></div></div></div></div></div></div></div></div></div></div>')
+                    }
+                    },
+
+                });
+            });
+          }); 
+
+    </script>
+
+    <script>
+
+        $(function(){
+            $('#make').attr('disabled', 'disabled'); 
+            $('#model_select').attr('disabled', 'disabled'); 
+            $('#engine').attr('disabled', 'disabled'); 
+            $('#catagory').attr('disabled', 'disabled');
+            $('#group').attr('disabled', 'disabled'); 
+            $("#year").change(function(){
+                var status = this.value;
+
+                if (status != "11"){
+                    $('#make').removeAttr('disabled');
+                }
+                
+            });
+
+        });
+    </script>
+    <script>
+
+              $(function(){
+                  var audi = ['A3',"A4","Q3","S3"];
+                  var honda = ['Accord',"Civic","Fit"];
+                  var kia = ['FORTE',"OPTIMA_(2014-)","RIO_HATCHBACK"];
+                  var mazda = ['MAZDA_3', 'MAZDA_6'];
+                  var nissan_datsun = ['370Z',"ALTIMA","LEAF","ROGUE"];
+                  var acura = ['ILX',"RDX"];
+                  var toyota = ['AVALON',"CAMRY","COROLLA_SEDAN","PRIUS","YARIS_HATCHBACK"];
+                  var hyundai = ['ACCENT_SEDAN',"Sonata"];
+                  
+
+                  $("#make").change(function(){
+
+                      var status = this.value;
+                      $('#model_select').empty();
+                      if(status == "11")
+                        $('#model_select').attr('disabled', 'disabled');     
+                      else if(status=="Audi")
+                        
+                        for (i = 0; i < audi.length; i++)
+                        {   
+                
+                            $('#model_select').append('<option value="'+audi[i]+'">'+audi[i]+'</option>');
+                            $('#model_select').removeAttr('disabled');
+                        }
+                        
+                      else if (status=="Honda")
+                      for (i = 0; i < honda.length; i++)
+                      { 
+          
+                          $('#model_select').append('<option value="'+honda[i]+'">'+honda[i]+'</option>');
+                          $('#model_select').removeAttr('disabled');
+                      }
+                      else if (status=="Kia")
+                      for (i = 0; i < kia.length; i++)
+                      {     
+                 
+                          $('#model_select').append('<option value="'+kia[i]+'">'+kia[i]+'</option>');
+                          $('#model_select').removeAttr('disabled');
+                      }
+                      else if (status=="Mazda")
+                      for (i = 0; i < mazda.length; i++)
+                      { 
+              
+                          $('#model_select').append('<option value="'+mazda[i]+'">'+mazda[i]+'</option>');
+                          $('#model_select').removeAttr('disabled');
+                      }
+                      else if (status=="Nissan Datsun")	
+                      for (i = 0; i < nissan_datsun.length; i++)
+                      { 
+       
+                          $('#model_select').append('<option value="'+nissan_datsun[i]+'">'+nissan_datsun[i]+'</option>');
+                          $('#model_select').removeAttr('disabled');
+                      }
+                      else if (status=="Acura")	
+                      for (i = 0; i < acura.length; i++)
+                      { 
+         
+                          $('#model_select').append('<option value="'+acura[i]+'">'+acura[i]+'</option>');
+                          $('#model_select').removeAttr('disabled');
+                      }
+                      else if (status=="Toyota")
+                      for (i = 0; i < toyota.length; i++)
+                      { 
+ 
+                          $('#model_select').append('<option value="'+toyota[i]+'">'+toyota[i]+'</option>');
+                          $('#model_select').removeAttr('disabled');
+                      }	
+                      else if (status=="Hyundai")
+                      for (i = 0; i < hyundai.length; i++)
+                      { 
+
+                          $('#model_select').append('<option value="'+hyundai[i]+'">'+hyundai[i]+'</option>');
+                          $('#model_select').removeAttr('disabled');
+                      }
+                   });
+
+                 });
+                 
+    </script>
+
+
+    <script>
+        $(function(){
+
+
+            var year_selected =   $('#year :selected').text();
+            $("#model_select").change(function(){
+                var status = this.value;
+                $('#engine').empty();
+                if (status == "11"){
+                    $('#engine').attr('disabled', 'disabled'); 
+                } 
+                else if((status =="A3") && (year_selected == "2016" || "2015")){
+                    $('#engine').append('<option value="2.0">2.0</option>');
+                    $('#engine').append('<option value="1.8">1.8</option>');
+                    $('#engine').removeAttr('disabled');                   
+                }
+                else if((status =="A3") && (year_selected != "2016" || "2015")){
+                    $('#engine').append('<option value="N/A">N/A</option>');
+                    $('#engine').removeAttr('disabled'); 
+                    $('#catagory').removeAttr('disabled');                 
+                }
+
+                else if(status == "A4" || "Q3" || "S3"){
+                    $('#engine').append('<option value="N/A">N/A</option>');
+                    $('#engine').removeAttr('disabled');
+                    $('#catagory').removeAttr('disabled');
+                    }
+                else if((status =="Accord") && (year_selected  == "2015" || "2016" || "2017")){
+                    $('#engine').append('<option value="2.4">2.4</option>');
+                    $('#engine').append('<option value="3.5">3.5</option>');
+                    $('#engine').removeAttr('disabled');
+
+                }else if((status =="Accord") && (year_selected  == "2018" || "2019" || "2020")){
+                    $('#engine').append('<option value="1.5">1.5</option>');
+                    $('#engine').append('<option value="2.0">2.0</option>');
+                    $('#engine').removeAttr('disabled');
+                }
+
+                else if(status == "Civic"){
+
+                }
+                else if(status =="Fit"){
+
+                }
+                else if(status =='FORTE'){
+
+                }
+                else if(status =="OPTIMA"){
+
+                }
+                else if(status =="RIO"){
+
+                }
+                else if(status =='3 Series'){
+
+                }
+                else if(status == '6 Series'){
+
+                }
+                else if(status == '370Z'){
+
+                }
+                else if(status =="ALTIMA"){
+
+                }
+                else if(status =="LEAF"){
+
+                }
+                else if(status =="ROGUE") {
+
+                }
+                else if(status =='ILX'){
+
+                }
+                else if(status =="RDX"){
+
+                }
+                else if(status =='AVALON'){
+
+                }
+                else if(status =="CAMRY"){
+
+                }
+                else if(status =="COROLLA"){
+
+                }
+                else if(status =="PRIUS"){
+
+                }
+                else if(status =="YARIS"){
+
+                }
+                else if(status =='Accent'){
+
+                }
+                else if(status =="Sonata"){
+
+                }
+                
+            });
+        });
+    </script>
+
+  </head>
+
+  <body>
     <nav class="navbar navbar-light navbar-expand-md">
-        <div class="container-fluid"><a class="navbar-brand text-uppercase fw-bold" href="#" style="background: url(&quot;assets/img/car-removebg-preview.png&quot;) left / contain no-repeat;width: 200px;height: 80px;"></a>
-            <div class="collapse navbar-collapse text-start" id="navcol-1">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="btn btn-secondary" role="button" style="border-radius: 16px;background: rgb(108,117,125);filter: brightness(100%);margin: 4px;" href="homepage.html">Product Search</a></li>
-                    <li class="nav-item"><a class="btn btn-secondary" role="button" style="margin: 4px;border-radius: 16px;background: rgb(108,117,125);filter: brightness(100%);" href="website-wise.html">Web-Wise Search</a></li>
-                    <li class="nav-item"><a class="btn btn-secondary" role="button" style="margin: 4px;border-radius: 16px;background: rgb(108,117,125);filter: brightness(100%);" href="part-number.html">Partnumber Search</a></li>
-                </ul>
-            </div><button data-bs-target="#navcol-1" data-bs-toggle="collapse" class="navbar-toggler"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+      <div class="container-fluid">
+        <a
+          class="navbar-brand text-uppercase fw-bold"
+          href="#"
+          style="
+            background: url('assets/img/car-removebg-preview.png') left /
+              contain no-repeat;
+            width: 200px;
+            height: 80px;
+          "
+        ></a>
+        <div class="collapse navbar-collapse text-start" id="navcol-1">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a
+                class="btn btn-secondary"
+                role="button"
+                style="
+                  border-radius: 16px;
+                  background: rgb(108, 117, 125);
+                  filter: brightness(100%);
+                  margin: 4px;
+                "
+                href="homepage.html"
+                >Product Search</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="btn btn-secondary"
+                role="button"
+                style="
+                  margin: 4px;
+                  border-radius: 16px;
+                  background: rgb(108, 117, 125);
+                  filter: brightness(100%);
+                "
+                href="website-wise.html"
+                >Web-Wise Search</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="btn btn-secondary"
+                role="button"
+                style="
+                  margin: 4px;
+                  border-radius: 16px;
+                  background: rgb(108, 117, 125);
+                  filter: brightness(100%);
+                "
+                href="part-number.html"
+                >Partnumber Search</a
+              >
+            </li>
+          </ul>
         </div>
+        <button
+          data-bs-target="#navcol-1"
+          data-bs-toggle="collapse"
+          class="navbar-toggler"
+        >
+          <span class="visually-hidden">Toggle navigation</span
+          ><span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
     </nav>
     <main>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12" style="margin: 20px;">
-                    <section class="getintouch">
-                        <div class="container modern-form">
-                            <div class="text-center">
-                                <h4 style="color: #212529;font-size: 45px;">Choose a world famous website and order your vehicle part</h4>
-                            </div>
-                            <hr class="modern-form__hr">
-                        </div>
-                    </section>
-                    <main></main>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12" style="margin: 20px">
+            <section class="getintouch">
+              <div class="container modern-form">
+                <div class="text-center">
+                  <h4 style="color: #212529; font-size: 45px">
+                    Choose a world famous website and order your vehicle part
+                  </h4>
                 </div>
-            </div>
+                <hr class="modern-form__hr" />
+              </div>
+            </section>
+            <main></main>
+          </div>
         </div>
+      </div>
     </main>
     <div class="container">
-        <div class="row">
-            <div class="col d-xl-flex justify-content-xl-center align-items-xl-center">
-                <h1 style="color: var(--bs-gray-600);font-family: Roboto, sans-serif;"><strong>Keystone</strong></h1>
-            </div>
+      <div class="row">
+        <div
+          class="col d-xl-flex justify-content-xl-center align-items-xl-center"
+        >
+          <h1
+            style="color: var(--bs-gray-600); font-family: Roboto, sans-serif"
+          >
+            <strong>Keystone</strong>
+          </h1>
         </div>
+      </div>
     </div>
     <div class="container">
-        <div class="row">
-            <div class="col-md-12" style="margin: 20px;">
-                <section class="getintouch"></section>
-                <main></main>
-                <form style="margin-top: 40px;">
-                    <div class="row p-0 m-0">
-                        <div class="col-lg-6 col-xl-6 p-0 m-0 p-3" id="formPersonal-1">
-                            <div class="form-group mb-3"><select class="form-select pb-2" required="" name="year">
-                                    <option value="11" selected="">Year</option>
-                                    <option value="">2015</option>
-                                    <option value="">2016</option>
-                                    <option value="">2017</option>
-                                    <option value="">2018</option>
-                                    <option value="">2019</option>
-                                    <option value="">2020</option>
-                                    <option value="">2021</option>
-                                </select></div>
-                            <div class="form-group mb-3"><select class="form-select pb-2" required="" name="model">
-                                    <option value="11" selected="">Model</option>
-                                </select></div>
-                        </div>
-                        <div class="col-lg-6 col-xl-6 p-0 m-0 p-3" id="formConocimientos-1">
-                            <div class="form-group mb-3"><select class="form-select pb-2" required="" name="make">
-                                    <option value="11" selected="">Make</option>
-                                    <option value="">AUDI</option>
-                                    <option value="">BMW</option>
-                                    <option value="">DAIHATSU</option>
-                                    <option value="">DATSUN</option>
-                                    <option value="">FORD</option>
-                                    <option value="">HONDA</option>
-                                    <option value="">HUMMER</option>
-                                    <option value="">HYUNDAI</option>
-                                    <option value="">ISUZU</option>
-                                    <option value="">JAGUAR</option>
-                                    <option value="">JEEP</option>
-                                    <option value="">KIA</option>
-                                    <option value="">LAND ROVER</option>
-                                    <option value="">MAZDA</option>
-                                    <option value="">MITSUBISHI</option>
-                                    <option value="">NISSAN</option>
-                                    <option value="">PEUGEOT</option>
-                                    <option value="">RENAULT</option>
-                                    <option value="">SUZUKI</option>
-                                    <option value="">TATA</option>
-                                    <option value="">TOYOTA</option>
-                                    <option value="">VOLKSWAGEN</option>
-                                </select></div>
-                            <div class="form-group mb-3"><select class="form-select pb-2" required="" name="group">
-                                    <option value="11" selected="">Group</option>
-                                </select></div>
-                        </div>
-                        <div class="col p-0 m-0 p-3"><button class="btn btn-success d-block w-100" type="button" style="background: rgb(124,187,164);">Search Parts</button></div>
-                    </div>
-                </form>
+      <div class="row">
+        <div class="col-md-12" style="margin: 20px">
+          <section class="getintouch"></section>
+          <main></main>
+          <form style="margin-top: 40px">
+            <div class="row p-0 m-0">
+              <div class="col-lg-6 col-xl-6 p-0 m-0 p-3" id="formPersonal-1">
+                <div class="form-group mb-3">
+                  <select class="form-select pb-2" required="" name="year"  id = "year">
+                    <option value="11" selected="">Year</option>
+                    <option value="">2015</option>
+                    <option value="">2016</option>
+                    <option value="">2017</option>
+                    <option value="">2018</option>
+                    <option value="">2019</option>
+                    <option value="">2020</option>
+                    <option value="">2021</option>
+                  </select>
+                </div>
+                <div class="form-group mb-3">
+                  <select class="form-select pb-2" required="" name="model"  id="model_select">
+                    <option value="11" selected="">Model</option>
+                  </select>
+                </div>
+              </div>
+              <div
+                class="col-lg-6 col-xl-6 p-0 m-0 p-3"
+                id="formConocimientos-1"
+              >
+                <div class="form-group mb-3">
+                    <select
+                    class="form-select pb-2"
+                    required=""
+                    name="make"
+                    id="make"
+                  >
+                    <option value="11" selected="">Make</option>
+                    <option value="Audi">Audi</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Kia">Kia</option>
+                    <option value="Mazda">Mazda</option>
+                    <option value="Nissan Datsun">Nissan Datsun</option>
+                    <option value="Acura">Acura</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Hyundai">Hyundai</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col p-0 m-0 p-3">
+                <button
+                  class="btn btn-success d-block w-100"
+                  type="button"
+                  style="background: rgb(124, 187, 164)"
+                  id= "searchButton"
+                >
+                  Search Parts
+                </button>
+              </div>
+
+              <div id="searchResults" class = "searchResults"></div>
             </div>
+          </form>
         </div>
+      </div>
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/Animated-Type-Heading.js"></script>
     <script src="assets/js/Dynamic-Table.js"></script>
     <script src="assets/js/Table-With-Search.js"></script>
-</body>
-
+  </body>
 </html>
