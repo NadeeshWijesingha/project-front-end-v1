@@ -46,13 +46,14 @@
                     data: JSON.stringify(param),
                     success: function (data, status) {
                      alert("Login Success!");
-                     $(location).prop('href', '/homepage.html');
+                     $(location).prop('href', './homepage.html');
                      
                     },
                     error: function(xhr, desc, err){
                         alert("Invalid Credentials");
                         $('#input_username').val('');
                         $('#input_password').val('');
+                        console.log(err)
                     }
 
                 });
