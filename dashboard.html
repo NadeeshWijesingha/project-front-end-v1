@@ -42,8 +42,8 @@
                     success: function (data, status) {
                         console.log(status);
                         console.log(data.length)
-                        for(var i= 0; i < data.data.length ; i++ )
-                        {$('.searchResults').append('<div class="row"><div class="col"><div class="card"><div class="card-body"><h4 class="card-title">Part Number: 'data.data[i].partNumber'</h4><h6 class="text-muted card-subtitle mb-2">Site :'data.data[i].site' </h6><h6 class="text-muted card-subtitle mb-2">Customer Name :'data.data[i].customerName'</h6><h6 class="text-muted card-subtitle mb-2">Customer Contact Number :'data.data[i].customerContactNumber'</h6></div></div></div></div>')
+                        for(var i= 0; i < data.length ; i++ )
+                        {$('.searchResults').append('<div class="row"><div class="col"><div class="card"><div class="card-body"><h4 class="card-title">Part Number: '+data[i].partNumber+'</h4><h6 class="text-muted card-subtitle mb-2">Site :'+data[i].site+' </h6><h6 class="text-muted card-subtitle mb-2">Customer Name :'+data[i].customerName+'</h6><h6 class="text-muted card-subtitle mb-2">Customer Contact Number :'+data[i].customerContactNumber+'</h6></div></div></div></div>')
                     }
                     },
 
