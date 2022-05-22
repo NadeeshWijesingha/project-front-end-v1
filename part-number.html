@@ -41,7 +41,6 @@
                     "addToCart": false
                   }
                   console.log(param);
-                  //$('.searchResults').append('<div class="row"><div class="col"><div><div class="card"><div class="card-body"><div class="container"><div class="row"><div class="col-3 d-xl-flex justify-content-xl-center align-items-xl-center"><img class="img-fluid d-xl-flex justify-content-xl-center align-items-xl-center" src="https://picsum.photos/seed/picsum/300/200" style="border-radius: 15px;" /></div><div class="col"><div class="row"><div class="col"><h4>title</h4></div></div><div class="row"><div class="col"><p style="color: var(--bs-gray-900);font-family: Roboto, sans-serif;font-size: 12px;">description</p></div></div><div class="row"><div class="col"><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">Part Number : Part Number</p><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">List Price : List Price</p><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">Your Price : Your Price</p></div></div></div></div></div></div></div></div></div></div>')    
                 
                 $.ajax({
                     url: 'http://localhost:8080/part-number-search',
@@ -79,7 +78,7 @@
                       "partNumber": input_text,
                       "customerName": input_name,
                       "customerContactNumber": input_mobile,
-                      "addToCart": false
+                      "addToCart": true
                   };
                   console.log(param);
                   $.ajax({
@@ -128,10 +127,10 @@
                     <main>
                         <form class="search-form"><select class="form-select" style="margin-bottom: 16px;">
                                 <optgroup label="This is a group" id='searchGroup'>
-                                    <option value="KEYSTONE_AUTOMOTIVE">KEYSTONE AUTOMOTIVE</option>
-                                    <option value="MY_PLACE_FOR_PARTS">MY PLACE FOR PARTS</option>
-                                    <option value="WORLD_AUTO">WORLD AUTO</option>
-                                    <option value="TIGER_AUTO_PARTS">TIGER AUTO PARTS</option>
+                                    <option value="KEYSTONE_AUTOMOTIVE">KEYSTONE_AUTOMOTIVE</option>
+                                    <option value="MY_PLACE_FOR_PARTS">MY_PLACE_FOR_PARTS</option>
+                                    <option value="WORLD_AUTO">WORLD_AUTO</option>
+                                    <option value="TIGER_AUTO_PARTS">TIGER_AUTO_PARTS</option>
                                 </optgroup>
                             </select>
                             <div class="input-group"><span class="input-group-text"><i class="fa fa-search"></i></span><input  id="input_text" class="form-control" type="text" placeholder="I am looking for.." style="margin-right: 10px;margin-left: 9px;border-width: 0px;"><button class="btn btn-secondary"  id='searchBtn' data-bss-hover-animate="pulse" type="button" style="border-radius: 15px;margin: 0px;">Search </button></div>
