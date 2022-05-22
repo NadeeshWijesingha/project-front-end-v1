@@ -32,7 +32,7 @@
 
     <script>
        $(document).ready(function(){
-            $("#searchButton").click(function(){
+            $("#cartButton").click(function(){
 
                 $.ajax({
                     url: 'http://localhost:8080/api/v1/cart',
@@ -79,7 +79,7 @@
             <div class="col">
                 <section class="contact-clean">
                     <form method="post">
-                        <h2 class="text-center">CART</h2><button class="btn btn-primary" type="submit" style="margin-left: 139px;">See cart</button>
+                        <h2 class="text-center">CART</h2><button class="btn btn-primary" type="button" id="cartButton" style="margin-left: 139px;">See cart</button>
                         <div class="mb-3"></div>
                         <div class="mb-3"></div>
                         <div class="mb-3"></div>
