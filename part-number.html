@@ -33,7 +33,7 @@
 
 
             $("#searchBtn").click(function(){
-                var site =  $('#searchGroup :selected').text()
+                var site =  $('#searchGroup option:selected').text()
                 var input_text = document.getElementById('input_text').value ;
                 var param = {
                     "site": site,
@@ -41,7 +41,7 @@
                     "addToCart": false
                   }
                   console.log(param);
-                  $('.searchResults').append('<div class="row"><div class="col"><div><div class="card"><div class="card-body"><div class="container"><div class="row"><div class="col-3 d-xl-flex justify-content-xl-center align-items-xl-center"><img class="img-fluid d-xl-flex justify-content-xl-center align-items-xl-center" src="https://picsum.photos/seed/picsum/300/200" style="border-radius: 15px;" /></div><div class="col"><div class="row"><div class="col"><h4>title</h4></div></div><div class="row"><div class="col"><p style="color: var(--bs-gray-900);font-family: Roboto, sans-serif;font-size: 12px;">description</p></div></div><div class="row"><div class="col"><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">Part Number : Part Number</p><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">List Price : List Price</p><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">Your Price : Your Price</p></div></div></div></div></div></div></div></div></div></div>')    
+                  //$('.searchResults').append('<div class="row"><div class="col"><div><div class="card"><div class="card-body"><div class="container"><div class="row"><div class="col-3 d-xl-flex justify-content-xl-center align-items-xl-center"><img class="img-fluid d-xl-flex justify-content-xl-center align-items-xl-center" src="https://picsum.photos/seed/picsum/300/200" style="border-radius: 15px;" /></div><div class="col"><div class="row"><div class="col"><h4>title</h4></div></div><div class="row"><div class="col"><p style="color: var(--bs-gray-900);font-family: Roboto, sans-serif;font-size: 12px;">description</p></div></div><div class="row"><div class="col"><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">Part Number : Part Number</p><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">List Price : List Price</p><p style="color: rgb(0,0,0);font-family: Roboto, sans-serif;font-size: 14px;">Your Price : Your Price</p></div></div></div></div></div></div></div></div></div></div>')    
                 
                 $.ajax({
                     url: 'http://localhost:8080/part-number-search',
@@ -70,7 +70,7 @@
         
   
               $("#makeOrder").click(function(){
-                  var site =  $('#searchGroup :selected').text()
+                  var site =  $("#searchGroup option:selected").val();
                   var input_text = document.getElementById('input_text').value;
                   var input_name = document.getElementById('nameInput').value ;
                   var input_mobile = document.getElementById('mobileInput').value ;
@@ -91,10 +91,10 @@
                       success: function (data, status) {
                           console.log(status);
                           console.log(data.length)
-                          alert("Inquire Success!");
+                          alert("Inquire Success");
                       },
   
-                  });*/
+                  });
               });
             }); 
   
